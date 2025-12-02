@@ -1,13 +1,23 @@
 {
-  "name": "code",
+  "name": "social-coding-blog",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "A modern, feature-rich blogging platform with social features",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:prod": "NODE_ENV=production vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "lint:fix": "eslint . --fix",
+    "preview": "vite preview",
+    "clean": "rm -rf dist node_modules",
+    "docker:build": "docker build -t blog-frontend .",
+    "docker:run": "docker run -d -p 80:80 --name blog-frontend blog-frontend",
+    "docker:stop": "docker stop blog-frontend && docker rm blog-frontend",
+    "compose:up": "docker-compose up -d",
+    "compose:down": "docker-compose down",
+    "compose:logs": "docker-compose logs -f"
   },
   "dependencies": {
     "lucide-react": "^0.555.0",
@@ -24,6 +34,11 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
+    "terser": "^5.44.1",
     "vite": "^7.2.4"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
   }
 }
