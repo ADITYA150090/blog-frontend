@@ -1,0 +1,49 @@
+/* Sidebar Profile Section */
+.sidebar-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: var(--vscode-panel);
+    border-radius: 8px;
+    margin-top: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.sidebar-profile:hover {
+    background: var(--vscode-hover);
+    border-color: var(--vscode-blue);
+    transform: translateX(3px);
+}
+
+.sidebar-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--vscode-blue);
+}
+
+.sidebar-user-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.sidebar-user-name {
+    color: var(--text-bright);
+    font-weight: 600;
+    font-size: 0.9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sidebar-user-username {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

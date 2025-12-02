@@ -1,0 +1,65 @@
+/* Workshop Popup Responsive Styles */
+@media (max-width: 768px) {
+    .card {
+        width: 90vw;
+        max-width: 20em;
+        margin: 0 1rem;
+    }
+
+    .card-title-area {
+        font-size: 1rem;
+        padding: 1.2em;
+    }
+
+    .card-body {
+        padding: 1.2em;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8em;
+    }
+
+    .card-actions {
+        flex-direction: column;
+        gap: 1em;
+        align-items: stretch;
+    }
+
+    .price {
+        text-align: center;
+    }
+
+    .card-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: 95vw;
+    }
+
+    .card-title-area {
+        font-size: 0.9em;
+        flex-direction: column;
+        gap: 0.5em;
+        align-items: flex-start;
+    }
+
+    .card-tag {
+        transform: rotate(0deg);
+    }
+
+    .card-description {
+        font-size: 0.85em;
+    }
+
+    .feature-text {
+        font-size: 0.8em;
+    }
+
+    .price {
+        font-size: 1.5em;
+    }
+}

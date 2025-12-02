@@ -1,0 +1,130 @@
+.user-search {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+
+.user-search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--vscode-sidebar);
+    border: 1px solid var(--vscode-border);
+    border-radius: 8px;
+    color: var(--text-bright);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.user-search-input:focus {
+    outline: none;
+    border-color: var(--vscode-blue);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.user-search-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.user-search-results {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    background: var(--vscode-sidebar);
+    border: 1px solid var(--vscode-border);
+    border-radius: 8px;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.search-loading,
+.search-no-results {
+    padding: 1rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--vscode-border);
+    text-decoration: none;
+    color: var(--text-bright);
+    transition: all 0.3s ease;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background: var(--vscode-bg);
+    transform: translateX(5px);
+}
+
+.search-result-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--vscode-border);
+}
+
+.search-result-info {
+    flex: 1;
+}
+
+.search-result-name {
+    color: var(--text-bright);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.search-result-username {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.search-result-stats {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+/* Scrollbar */
+.user-search-results::-webkit-scrollbar {
+    width: 8px;
+}
+
+.user-search-results::-webkit-scrollbar-track {
+    background: var(--vscode-bg);
+}
+
+.user-search-results::-webkit-scrollbar-thumb {
+    background: var(--vscode-border);
+    border-radius: 4px;
+}
+
+.user-search-results::-webkit-scrollbar-thumb:hover {
+    background: var(--vscode-blue);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .user-search {
+        max-width: 100%;
+    }
+
+    .search-result-item {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .search-result-avatar {
+        width: 35px;
+        height: 35px;
+    }
+}

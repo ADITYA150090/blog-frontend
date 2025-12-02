@@ -1,0 +1,114 @@
+.newsletter-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(180deg, transparent 0%, rgba(16, 185, 129, 0.05) 100%);
+    border-top: 1px solid var(--vscode-border);
+}
+
+.newsletter-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    background: var(--vscode-sidebar);
+    padding: 3rem;
+    border-radius: 16px;
+    border: 1px solid var(--vscode-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.newsletter-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+.newsletter-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.newsletter-content p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    border: 1px solid var(--vscode-border);
+    background: var(--vscode-bg);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form input:focus {
+    border-color: var(--vscode-blue);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    outline: none;
+}
+
+.newsletter-form button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    background: var(--vscode-blue);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form button:hover {
+    background: var(--vscode-blue-hover, #4f6ef7);
+    transform: translateY(-2px);
+}
+
+.newsletter-form button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.newsletter-form button.success {
+    background: #10b981;
+}
+
+.newsletter-message {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.newsletter-message.success {
+    color: #10b981;
+}
+
+.newsletter-message.error {
+    color: #ef4444;
+}
+
+@media (max-width: 600px) {
+    .newsletter-form {
+        flex-direction: column;
+    }
+
+    .newsletter-container {
+        padding: 2rem 1.5rem;
+    }
+}

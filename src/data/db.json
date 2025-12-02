@@ -1,0 +1,196 @@
+{
+    "blogs": [
+        {
+            "id": 1,
+            "title": "Building a Real-Time Chat Application with WebSockets",
+            "slug": "realtime-chat-websockets",
+            "excerpt": "Learn how to build a scalable real-time chat application using WebSockets, Node.js, and React with proper authentication and message persistence.",
+            "category": "Full Stack",
+            "tags": [
+                "WebSockets",
+                "React",
+                "Node.js",
+                "Real-time"
+            ],
+            "author": "Code Master",
+            "date": "2024-11-15",
+            "readTime": "12 min",
+            "featured": true,
+            "thumbnail": "chat-app.jpg",
+            "code": {
+                "language": "javascript",
+                "snippet": "// WebSocket connection setup\nconst socket = new WebSocket('ws://localhost:8080');\n\nsocket.onopen = () => {\n  console.log('Connected to chat server');\n};\n\nsocket.onmessage = (event) => {\n  const message = JSON.parse(event.data);\n  displayMessage(message);\n};\n\nfunction sendMessage(text) {\n  socket.send(JSON.stringify({\n    type: 'message',\n    content: text,\n    timestamp: Date.now()\n  }));\n}"
+            }
+        },
+        {
+            "id": 2,
+            "title": "Advanced React Patterns: Compound Components",
+            "slug": "advanced-react-compound-components",
+            "excerpt": "Master the compound component pattern in React to build flexible and reusable component APIs that are both powerful and intuitive.",
+            "category": "React",
+            "tags": [
+                "React",
+                "Design Patterns",
+                "Component Architecture"
+            ],
+            "author": "Code Master",
+            "date": "2024-11-10",
+            "readTime": "8 min",
+            "featured": true,
+            "thumbnail": "react-patterns.jpg",
+            "code": {
+                "language": "jsx",
+                "snippet": "// Compound Component Pattern\nconst Tabs = ({ children }) => {\n  const [activeTab, setActiveTab] = useState(0);\n  \n  return (\n    <TabsContext.Provider value={{ activeTab, setActiveTab }}>\n      <div className=\"tabs\">{children}</div>\n    </TabsContext.Provider>\n  );\n};\n\nTabs.List = ({ children }) => (\n  <div className=\"tabs-list\">{children}</div>\n);\n\nTabs.Tab = ({ index, children }) => {\n  const { activeTab, setActiveTab } = useContext(TabsContext);\n  return (\n    <button onClick={() => setActiveTab(index)}>\n      {children}\n    </button>\n  );\n};"
+            }
+        },
+        {
+            "id": 3,
+            "title": "Optimizing Database Queries with Indexing Strategies",
+            "slug": "database-indexing-optimization",
+            "excerpt": "Deep dive into database indexing strategies to dramatically improve query performance and reduce response times in production applications.",
+            "category": "Backend",
+            "tags": [
+                "Database",
+                "PostgreSQL",
+                "Performance",
+                "Optimization"
+            ],
+            "author": "Code Master",
+            "date": "2024-11-05",
+            "readTime": "15 min",
+            "featured": true,
+            "thumbnail": "database-opt.jpg",
+            "code": {
+                "language": "sql",
+                "snippet": "-- Create composite index for faster queries\nCREATE INDEX idx_users_email_status \nON users(email, status) \nWHERE status = 'active';\n\n-- Analyze query performance\nEXPLAIN ANALYZE\nSELECT u.id, u.name, COUNT(o.id) as order_count\nFROM users u\nLEFT JOIN orders o ON u.id = o.user_id\nWHERE u.status = 'active'\nGROUP BY u.id, u.name\nHAVING COUNT(o.id) > 5;"
+            }
+        },
+        {
+            "id": 4,
+            "title": "Building Microservices with Docker and Kubernetes",
+            "slug": "microservices-docker-kubernetes",
+            "excerpt": "A comprehensive guide to architecting, deploying, and scaling microservices using Docker containers and Kubernetes orchestration.",
+            "category": "DevOps",
+            "tags": [
+                "Docker",
+                "Kubernetes",
+                "Microservices",
+                "DevOps"
+            ],
+            "author": "Code Master",
+            "date": "2024-10-28",
+            "readTime": "20 min",
+            "featured": false,
+            "thumbnail": "kubernetes.jpg",
+            "code": {
+                "language": "yaml",
+                "snippet": "# Kubernetes Deployment Configuration\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: api-service\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: api\n  template:\n    metadata:\n      labels:\n        app: api\n    spec:\n      containers:\n      - name: api\n        image: myapp/api:latest\n        ports:\n        - containerPort: 3000\n        env:\n        - name: DATABASE_URL\n          valueFrom:\n            secretKeyRef:\n              name: db-secret\n              key: url"
+            }
+        },
+        {
+            "id": 5,
+            "title": "Implementing Authentication with JWT and Refresh Tokens",
+            "slug": "jwt-refresh-token-auth",
+            "excerpt": "Build a secure authentication system using JSON Web Tokens with refresh token rotation and proper security best practices.",
+            "category": "Security",
+            "tags": [
+                "Authentication",
+                "JWT",
+                "Security",
+                "Node.js"
+            ],
+            "author": "Code Master",
+            "date": "2024-10-20",
+            "readTime": "10 min",
+            "featured": true,
+            "thumbnail": "jwt-auth.jpg",
+            "code": {
+                "language": "javascript",
+                "snippet": "// JWT Authentication with Refresh Tokens\nconst generateTokens = (userId) => {\n  const accessToken = jwt.sign(\n    { userId },\n    process.env.ACCESS_TOKEN_SECRET,\n    { expiresIn: '15m' }\n  );\n  \n  const refreshToken = jwt.sign(\n    { userId },\n    process.env.REFRESH_TOKEN_SECRET,\n    { expiresIn: '7d' }\n  );\n  \n  return { accessToken, refreshToken };\n};\n\napp.post('/refresh', async (req, res) => {\n  const { refreshToken } = req.body;\n  const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);\n  const tokens = generateTokens(decoded.userId);\n  res.json(tokens);\n});"
+            }
+        },
+        {
+            "id": 6,
+            "title": "CSS Grid and Flexbox: Modern Layout Techniques",
+            "slug": "css-grid-flexbox-layouts",
+            "excerpt": "Master modern CSS layout systems with practical examples of Grid and Flexbox to create responsive, maintainable designs.",
+            "category": "Frontend",
+            "tags": [
+                "CSS",
+                "Layout",
+                "Responsive Design",
+                "Web Design"
+            ],
+            "author": "Code Master",
+            "date": "2024-10-12",
+            "readTime": "7 min",
+            "featured": false,
+            "thumbnail": "css-layout.jpg",
+            "code": {
+                "language": "css",
+                "snippet": "/* Modern CSS Grid Layout */\n.dashboard {\n  display: grid;\n  grid-template-columns: 250px 1fr;\n  grid-template-rows: 60px 1fr 40px;\n  grid-template-areas:\n    \"sidebar header\"\n    \"sidebar main\"\n    \"sidebar footer\";\n  min-height: 100vh;\n  gap: 1rem;\n}\n\n.sidebar { grid-area: sidebar; }\n.header { grid-area: header; }\n.main { grid-area: main; }\n.footer { grid-area: footer; }\n\n/* Responsive Flexbox */\n.card-grid {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 1.5rem;\n}\n\n.card {\n  flex: 1 1 300px;\n  max-width: 400px;\n}"
+            }
+        }
+    ],
+    "portfolio": [
+        {
+            "id": 1,
+            "title": "E-Commerce Platform",
+            "slug": "e-commerce-platform",
+            "description": "Full-stack e-commerce solution with payment integration",
+            "tech": [
+                "React",
+                "Node.js",
+                "PostgreSQL",
+                "Stripe"
+            ],
+            "github": "https://github.com/example/ecommerce",
+            "live": "https://example-shop.com"
+        },
+        {
+            "id": 2,
+            "title": "Task Management App",
+            "slug": "task-management-app",
+            "description": "Collaborative task management with real-time updates",
+            "tech": [
+                "React",
+                "Firebase",
+                "Material-UI"
+            ],
+            "github": "https://github.com/example/taskapp",
+            "live": "https://example-tasks.com"
+        },
+        {
+            "id": 3,
+            "title": "Analytics Dashboard",
+            "slug": "analytics-dashboard",
+            "description": "Data visualization dashboard with interactive charts",
+            "tech": [
+                "React",
+                "D3.js",
+                "Express",
+                "MongoDB"
+            ],
+            "github": "https://github.com/example/analytics",
+            "live": "https://example-analytics.com"
+        }
+    ],
+    "about": {
+        "name": "Code Master",
+        "title": "Full Stack Developer",
+        "bio": "Passionate developer specializing in building scalable web applications with modern technologies. I love sharing knowledge through code tutorials and open-source contributions.",
+        "skills": [
+            "React",
+            "Node.js",
+            "TypeScript",
+            "PostgreSQL",
+            "Docker",
+            "AWS"
+        ],
+        "social": {
+            "github": "https://github.com/codemaster",
+            "twitter": "https://twitter.com/codemaster",
+            "linkedin": "https://linkedin.com/in/codemaster"
+        }
+    }
+}

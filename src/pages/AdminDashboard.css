@@ -1,0 +1,290 @@
+.admin-dashboard {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-header {
+    margin-bottom: 2rem;
+}
+
+.admin-header h1 {
+    font-size: 2.5rem;
+    color: var(--text-bright);
+    margin-bottom: 0.5rem;
+}
+
+.admin-message {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.admin-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--vscode-border);
+    padding-bottom: 1rem;
+    overflow-x: auto;
+}
+
+.admin-tab {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.admin-tab:hover {
+    color: var(--text-bright);
+    background: var(--vscode-hover);
+}
+
+.admin-tab.active {
+    color: var(--vscode-blue);
+    background: rgba(102, 126, 234, 0.1);
+    font-weight: 600;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: var(--vscode-sidebar);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--vscode-border);
+}
+
+.stat-card.highlight {
+    border-color: var(--vscode-blue);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+}
+
+.stat-card h3 {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-bright);
+}
+
+/* Recent Users */
+.recent-section {
+    background: var(--vscode-sidebar);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--vscode-border);
+}
+
+.recent-user-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--vscode-border);
+}
+
+.recent-user-item:last-child {
+    border-bottom: none;
+}
+
+.recent-user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.recent-user-info {
+    flex: 1;
+}
+
+.recent-user-info .name {
+    display: block;
+    color: var(--text-bright);
+    font-weight: 500;
+}
+
+.recent-user-info .email {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Forms */
+.form-container {
+    background: var(--vscode-sidebar);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--vscode-border);
+    max-width: 800px;
+}
+
+.form-container h2 {
+    margin-bottom: 1.5rem;
+    color: var(--text-bright);
+}
+
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-group label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background: var(--vscode-bg);
+    border: 1px solid var(--vscode-border);
+    color: var(--text-primary);
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--vscode-blue);
+    outline: none;
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-group textarea.content-area {
+    min-height: 200px;
+    font-family: monospace;
+}
+
+.btn-submit {
+    background: var(--vscode-blue);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background 0.2s;
+}
+
+.btn-submit:hover {
+    background: var(--vscode-blue-hover, #4f6ef7);
+}
+
+.btn-warning {
+    background: #eab308;
+    color: black;
+}
+
+.btn-warning:hover {
+    background: #ca8a04;
+}
+
+/* Tables */
+.users-table-container {
+    overflow-x: auto;
+    background: var(--vscode-sidebar);
+    border-radius: 12px;
+    border: 1px solid var(--vscode-border);
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.users-table th,
+.users-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--vscode-border);
+}
+
+.users-table th {
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.user-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.table-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.role-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.role-badge.admin {
+    background: rgba(102, 126, 234, 0.2);
+    color: var(--vscode-blue);
+}
+
+.role-badge.user {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+}
+
+.btn-delete {
+    padding: 0.4rem 0.8rem;
+    background: rgba(255, 68, 68, 0.1);
+    color: #ff4444;
+    border: 1px solid rgba(255, 68, 68, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-delete:hover {
+    background: rgba(255, 68, 68, 0.2);
+}

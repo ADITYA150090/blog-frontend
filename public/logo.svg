@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="#1e1e1e" stroke="url(#logoGradient)" stroke-width="2"/>
+  
+  <!-- Code brackets {} -->
+  <path d="M 30 25 Q 25 25 25 30 L 25 45 Q 25 50 20 50 Q 25 50 25 55 L 25 70 Q 25 75 30 75" 
+        fill="none" stroke="url(#logoGradient)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 70 25 Q 75 25 75 30 L 75 45 Q 75 50 80 50 Q 75 50 75 55 L 75 70 Q 75 75 70 75" 
+        fill="none" stroke="url(#logoGradient)" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Document/Blog icon in center -->
+  <rect x="40" y="35" width="20" height="30" rx="2" fill="url(#logoGradient)" opacity="0.8"/>
+  <line x1="43" y1="42" x2="57" y2="42" stroke="#1e1e1e" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="43" y1="48" x2="57" y2="48" stroke="#1e1e1e" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="43" y1="54" x2="52" y2="54" stroke="#1e1e1e" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

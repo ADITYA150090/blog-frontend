@@ -1,0 +1,319 @@
+.user-profile {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Profile Header */
+.profile-header {
+    background: var(--vscode-sidebar);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    border: 1px solid var(--vscode-border);
+}
+
+.profile-cover {
+    height: 200px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.profile-info {
+    padding: 0 2rem 2rem;
+    position: relative;
+}
+
+.profile-avatar-container {
+    margin-top: -75px;
+    margin-bottom: 1rem;
+}
+
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid var(--vscode-sidebar);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.profile-name {
+    font-size: 2rem;
+    color: var(--text-bright);
+    margin: 0.5rem 0;
+}
+
+.profile-username {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin: 0.25rem 0;
+}
+
+.profile-title {
+    color: var(--vscode-blue);
+    font-size: 1rem;
+    margin: 0.25rem 0;
+}
+
+.profile-bio {
+    color: var(--text-secondary);
+    margin: 1rem 0;
+    line-height: 1.6;
+}
+
+.profile-meta {
+    color: var(--text-secondary);
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.profile-meta a {
+    color: var(--vscode-blue);
+    text-decoration: none;
+}
+
+.profile-meta a:hover {
+    text-decoration: underline;
+}
+
+/* Social Links */
+.profile-social {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.profile-social a {
+    padding: 0.5rem 1rem;
+    background: var(--vscode-bg);
+    color: var(--vscode-blue);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid var(--vscode-border);
+}
+
+.profile-social a:hover {
+    background: var(--vscode-blue);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Stats */
+.profile-stats {
+    display: flex;
+    gap: 2rem;
+    margin: 1.5rem 0;
+    padding: 1rem 0;
+    border-top: 1px solid var(--vscode-border);
+    border-bottom: 1px solid var(--vscode-border);
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-bright);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+/* Buttons */
+.follow-button,
+.edit-profile-button {
+    padding: 0.75rem 2rem;
+    background: var(--vscode-blue);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.follow-button:hover,
+.edit-profile-button:hover {
+    background: var(--vscode-purple);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.follow-button.following {
+    background: var(--vscode-border);
+    color: var(--text-secondary);
+}
+
+.profile-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* Edit Profile Section */
+.edit-profile-section {
+    background: var(--vscode-sidebar);
+    border: 1px solid var(--vscode-border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.edit-profile-section h2 {
+    color: var(--text-bright);
+    margin-bottom: 1.5rem;
+}
+
+.edit-profile-section h3 {
+    color: var(--text-bright);
+    margin: 1.5rem 0 1rem;
+    font-size: 1.1rem;
+}
+
+.edit-profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.edit-profile-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.edit-profile-form label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.edit-profile-form input,
+.edit-profile-form textarea {
+    padding: 0.75rem;
+    background: var(--vscode-bg);
+    border: 1px solid var(--vscode-border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.edit-profile-form input:focus,
+.edit-profile-form textarea:focus {
+    outline: none;
+    border-color: var(--vscode-blue);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.edit-profile-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.save-profile-button {
+    padding: 0.75rem 2rem;
+    background: var(--vscode-blue);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+}
+
+.save-profile-button:hover {
+    background: var(--vscode-purple);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Tabs */
+.profile-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--vscode-border);
+}
+
+.tab {
+    padding: 1rem 1.5rem;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.tab:hover {
+    color: var(--text-bright);
+}
+
+.tab.active {
+    color: var(--vscode-blue);
+    border-bottom-color: var(--vscode-blue);
+}
+
+/* Tab Content */
+.tab-content {
+    background: var(--vscode-sidebar);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--vscode-border);
+}
+
+.tab-content h3 {
+    color: var(--text-bright);
+    margin-bottom: 1.5rem;
+}
+
+/* Loading */
+.profile-loading {
+    text-align: center;
+    padding: 4rem;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+}
+
+.profile-not-found {
+    text-align: center;
+    padding: 4rem;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .user-profile {
+        padding: 1rem;
+    }
+
+    .profile-cover {
+        height: 120px;
+    }
+
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-stats {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}

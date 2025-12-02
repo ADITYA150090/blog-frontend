@@ -1,0 +1,146 @@
+.search-page {
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.search-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.search-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.search-header p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.search-container-large {
+    max-width: 600px;
+    margin: 0 auto 4rem;
+}
+
+.search-container-large .user-search-input {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    background: var(--vscode-sidebar);
+    border: 2px solid var(--vscode-border);
+}
+
+.search-container-large .user-search-input:focus {
+    border-color: var(--vscode-blue);
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.suggested-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-bright);
+    border-left: 4px solid var(--vscode-blue);
+    padding-left: 1rem;
+}
+
+.users-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.user-card {
+    background: var(--vscode-sidebar);
+    border: 1px solid var(--vscode-border);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--vscode-blue);
+    box-shadow: var(--shadow-lg);
+}
+
+.user-card-header {
+    height: 80px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.user-card-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid var(--vscode-sidebar);
+    position: absolute;
+    bottom: -40px;
+    object-fit: cover;
+    background: var(--vscode-sidebar);
+}
+
+.user-card-body {
+    padding: 3rem 1.5rem 1.5rem;
+    text-align: center;
+    flex: 1;
+}
+
+.user-card-body h3 {
+    color: var(--text-bright);
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.user-card-username {
+    color: var(--vscode-blue);
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.user-card-bio {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.user-card-stats {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.btn-view-profile {
+    margin: 0 1.5rem 1.5rem;
+    padding: 0.75rem;
+    background: transparent;
+    border: 1px solid var(--vscode-border);
+    color: var(--text-primary);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.user-card:hover .btn-view-profile {
+    background: var(--vscode-blue);
+    color: white;
+    border-color: var(--vscode-blue);
+}
+
+.no-suggestions {
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 2rem;
+    grid-column: 1 / -1;
+}

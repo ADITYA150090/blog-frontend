@@ -1,0 +1,306 @@
+.popup-manager {
+    padding: 2rem;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.popup-header h2 {
+    color: var(--text-bright);
+    margin: 0;
+}
+
+.message-banner {
+    background: var(--vscode-blue);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.message-banner button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0 0.5rem;
+}
+
+.popup-form {
+    background: var(--vscode-sidebar);
+    border: 1px solid var(--vscode-border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.popup-form h3 {
+    color: var(--text-bright);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+.popup-form h4 {
+    color: var(--text-bright);
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 0.75rem;
+    background: var(--vscode-bg);
+    border: 1px solid var(--vscode-border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--vscode-blue);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group input[type="color"] {
+    height: 50px;
+    cursor: pointer;
+}
+
+.form-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+.features-section {
+    margin: 1.5rem 0;
+}
+
+.feature-input {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-input input {
+    padding: 0.75rem;
+    background: var(--vscode-bg);
+    border: 1px solid var(--vscode-border);
+    border-radius: 6px;
+    color: var(--text-primary);
+}
+
+.colors-section {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: var(--vscode-bg);
+    border-radius: 8px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.popups-list {
+    margin-top: 2rem;
+}
+
+.popups-list h3 {
+    color: var(--text-bright);
+    margin-bottom: 1.5rem;
+}
+
+.popups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.popup-card {
+    background: var(--vscode-sidebar);
+    border: 2px solid var(--vscode-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.popup-card.active {
+    border-color: var(--vscode-blue);
+}
+
+.popup-card.inactive {
+    opacity: 0.6;
+}
+
+.popup-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.popup-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.popup-card-header h4 {
+    color: var(--text-bright);
+    margin: 0;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-badge.active {
+    background: rgba(0, 224, 176, 0.2);
+    color: #00e0b0;
+}
+
+.status-badge.inactive {
+    background: rgba(255, 62, 0, 0.2);
+    color: #ff3e00;
+}
+
+.popup-description {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.popup-details {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: var(--vscode-bg);
+    border-radius: 8px;
+}
+
+.detail-item {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.detail-item:last-child {
+    margin-bottom: 0;
+}
+
+.detail-item strong {
+    color: var(--text-bright);
+}
+
+.popup-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: var(--vscode-blue);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--vscode-purple);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: var(--vscode-border);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--text-secondary);
+    color: white;
+}
+
+.btn-success {
+    background: #00e0b0;
+    color: white;
+}
+
+.btn-warning {
+    background: #ff9500;
+    color: white;
+}
+
+.btn-danger {
+    background: #ff3e00;
+    color: white;
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+    .popup-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-input {
+        grid-template-columns: 1fr;
+    }
+
+    .popups-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .popup-actions {
+        flex-wrap: wrap;
+    }
+}
