@@ -6,13 +6,13 @@ const Newsletter = () => {
     const [email, setEmail] = useState('');
     const [status, setStatus] = useState(''); // 'loading', 'success', 'error'
     const [message, setMessage] = useState('');
-
+    const VITE_API_URL = import.meta.env.VITE_API_URL;
     const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('loading');
 
         try {
-            await axios.post('http://localhost:5000/api/newsletter/subscribe', { email });
+            await axios.post(`${VITE_API_URL}/api/newsletter/subscribe`, { email });
             setStatus('success');
             setMessage('Thanks for subscribing! 🚀');
             setEmail('');

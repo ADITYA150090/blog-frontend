@@ -3,6 +3,8 @@ import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import './ArticleActions.css';
 
+
+
 const ArticleActions = ({ blogId, blogSlug }) => {
     const { user, isAuthenticated } = useAuth();
     const [liked, setLiked] = useState(false);
@@ -10,7 +12,7 @@ const ArticleActions = ({ blogId, blogSlug }) => {
     const [likeCount, setLikeCount] = useState(0);
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
-
+    const VITE_API_URL = import.meta.env.VITE_API_URL;
     useEffect(() => {
         if (isAuthenticated) {
             checkUserActions();
@@ -26,8 +28,7 @@ const ArticleActions = ({ blogId, blogSlug }) => {
                 console.log('No valid token found');
                 return;
             }
-
-            const { data } = await axios.get(`http://localhost:5000/api/users/${user.username}`, {
+            const { data } = await axios.get(`${VITE_API_URL}/api/users/${user.username}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 

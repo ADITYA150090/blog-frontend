@@ -9,7 +9,7 @@ const SearchPage = () => {
     const { user: currentUser } = useAuth();
     const [suggestedUsers, setSuggestedUsers] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const VITE_API_URL = import.meta.env.VITE_API_URL;
     useEffect(() => {
         fetchSuggestedUsers();
     }, []);
@@ -19,7 +19,7 @@ const SearchPage = () => {
             // For now, just fetch some users. In a real app, this would be a recommendation algorithm.
             // We'll use the search endpoint with a generic query or a new endpoint if available.
             // Since we don't have a specific "suggested" endpoint, we'll search for "a" to get some results.
-            const { data } = await axios.get('http://localhost:5000/api/users/search?q=a');
+            const { data } = await axios.get(`${VITE_API_URL}/api/users/search?q=a`);
 
             // Filter out current user and already followed users
             const filtered = data.filter(u =>

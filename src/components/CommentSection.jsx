@@ -9,7 +9,7 @@ const CommentSection = ({ blogSlug }) => {
     const [newComment, setNewComment] = useState('');
     const [showAuthModal, setShowAuthModal] = useState(false);
     const [loading, setLoading] = useState(false);
-
+    const VITE_API_URL = import.meta.env.VITE_API_URL;
     useEffect(() => {
         // Fetch comments
         fetchComments();
@@ -17,7 +17,7 @@ const CommentSection = ({ blogSlug }) => {
 
     const fetchComments = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/comments/${blogSlug}`);
+            const response = await fetch(`${VITE_API_URL}/api/comments/${blogSlug}`);
             const data = await response.json();
             setComments(data);
         } catch (error) {
@@ -48,7 +48,7 @@ const CommentSection = ({ blogSlug }) => {
                 return;
             }
 
-            const response = await fetch('http://localhost:5000/api/comments', {
+            const response = await fetch(`${VITE_API_URL}/api/comments`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ const CommentSection = ({ blogSlug }) => {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/api/comments/${commentId}`, {
+            const response = await fetch(`${VITE_API_URL}/api/comments/${commentId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
