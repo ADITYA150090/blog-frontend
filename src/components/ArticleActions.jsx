@@ -55,7 +55,7 @@ const ArticleActions = ({ blogId, blogSlug }) => {
             }
 
             const { data } = await axios.post(
-                'http://localhost:5000/api/users/like',
+                `${VITE_API_URL}/api/users/like`,
                 { blogId, blogSlug },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -95,7 +95,7 @@ const ArticleActions = ({ blogId, blogSlug }) => {
             }
 
             const { data } = await axios.post(
-                'http://localhost:5000/api/users/bookmark',
+                `${VITE_API_URL}/api/users/bookmark`,
                 { blogId, blogSlug },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

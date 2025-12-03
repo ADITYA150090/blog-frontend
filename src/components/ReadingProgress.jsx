@@ -48,7 +48,7 @@ const ReadingProgress = ({ blogId, blogSlug }) => {
         try {
             const token = localStorage.getItem('token');
             await axios.post(
-                'http://localhost:5000/api/users/reading-history',
+                `${VITE_API_URL}/api/users/reading-history`,
                 {
                     blogId,
                     blogSlug,
