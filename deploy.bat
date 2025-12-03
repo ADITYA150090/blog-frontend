@@ -96,7 +96,7 @@ if "%choice%"=="1" (
     docker rm blog-frontend 2>nul
     
     REM Run container
-    docker run -d -p 80:80 --name blog-frontend blog-frontend
+    docker run -d -p 80:80 -e BACKEND_URL=http://host.docker.internal:5000 --name blog-frontend blog-frontend
     
     echo.
     echo ✓ Frontend deployed!

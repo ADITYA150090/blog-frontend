@@ -60,19 +60,19 @@ const Sidebar = () => {
             {/* <img src="/logo.svg" alt="CodeBlog Logo" style={{ width: '32px', height: '32px' }} /> */}
             <span>Coffee & Code</span>
           </Link>
-          {isAuthenticated && user && (
+          {isAuthenticated && user && user.username && (
             <Link
               to={`/profile/${user.username}`}
               className="sidebar-profile"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <img
-                src={user.avatar || `https://ui-avatars.com/api/?name=${user.name}&background=random&size=32`}
-                alt={user.name}
+                src={user.avatar || `https://ui-avatars.com/api/?name=${user.name || 'User'}&background=random&size=32`}
+                alt={user.name || 'User'}
                 className="sidebar-avatar"
               />
               <div className="sidebar-user-info">
-                <div className="sidebar-user-name">{user.name}</div>
+                <div className="sidebar-user-name">{user.name || 'User'}</div>
                 <div className="sidebar-user-username">@{user.username}</div>
               </div>
             </Link>
@@ -130,23 +130,27 @@ const Sidebar = () => {
             <div className="nav-section">
               <div className="nav-section-title">Personal</div>
 
-              <Link
-                to={`/profile/${user.username}`}
-                className="nav-item"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <User className="nav-icon" size={18} />
-                <span>My Profile</span>
-              </Link>
+              {user.username && (
+                <Link
+                  to={`/profile/${user.username}`}
+                  className="nav-item"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <User className="nav-icon" size={18} />
+                  <span>My Profile</span>
+                </Link>
+              )}
 
-              <Link
-                to={`/profile/${user.username}#bookmarks`}
-                className="nav-item"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <Bookmark className="nav-icon" size={18} />
-                <span>Bookmarks</span>
-              </Link>
+              {user.username && (
+                <Link
+                  to={`/profile/${user.username}#bookmarks`}
+                  className="nav-item"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <Bookmark className="nav-icon" size={18} />
+                  <span>Bookmarks</span>
+                </Link>
+              )}
 
               {user.role === 'admin' && (
                 <Link

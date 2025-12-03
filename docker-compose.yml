@@ -11,6 +11,7 @@ services:
       - "80:80"
     environment:
       - NODE_ENV=production
+      - BACKEND_URL=http://backend:5000
     restart: unless-stopped
     networks:
       - blog-network

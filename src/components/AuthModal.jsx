@@ -8,7 +8,6 @@ const AuthModal = ({ isOpen, onClose }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        username: '',
         password: ''
     });
     const [loading, setLoading] = useState(false);
@@ -37,9 +36,9 @@ const AuthModal = ({ isOpen, onClose }) => {
                     window.location.reload(); // Refresh to update UI
                 }, 1000);
             } else {
-                await register(formData.name, formData.email, formData.password, formData.username);
+                await register(formData.name, formData.email, formData.password);
                 setMessage('Registration successful! Please check your email to verify.');
-                setFormData({ name: '', email: '', username: '', password: '' });
+                setFormData({ name: '', email: '', password: '' });
             }
         } catch (err) {
             setError(err);
@@ -126,29 +125,6 @@ const AuthModal = ({ isOpen, onClose }) => {
                                     value={formData.name}
                                     onChange={handleChange}
                                     required
-                                    style={{
-                                        width: '100%',
-                                        padding: '0.75rem',
-                                        backgroundColor: 'var(--vscode-sidebar)',
-                                        border: '1px solid var(--vscode-border)',
-                                        borderRadius: '4px',
-                                        color: 'var(--text-primary)'
-                                    }}
-                                />
-                            </div>
-
-                            <div style={{ marginBottom: '1rem' }}>
-                                <label style={{ display: 'block', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
-                                    Username (unique, 3-20 characters)
-                                </label>
-                                <input
-                                    type="text"
-                                    name="username"
-                                    value={formData.username}
-                                    onChange={handleChange}
-                                    required
-                                    pattern="[a-zA-Z0-9_]{3,20}"
-                                    placeholder="johndoe"
                                     style={{
                                         width: '100%',
                                         padding: '0.75rem',
