@@ -25,18 +25,19 @@ RUN npm run build
 # Stage 2: Production image with nginx
 FROM nginx:alpine
 
-# Copy custom nginx configuration template
-COPY nginx.conf.template /etc/nginx/templates/default.conf.template
+# Copy startup script
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 
 # Copy built assets from builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Add healthcheck
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget --quiet --tries=1 --spider http://localhost:80/ || exit 1
+  CMD wget --quiet --tries=1 --spider http://localhost:${PORT:-80}/health || exit 1
 
-# Expose port 80
-EXPOSE 80
+# Expose port (Railway will set PORT env var)
+EXPOSE ${PORT:-80}
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start nginx with dynamic port configuration
+CMD ["/start.sh"]
