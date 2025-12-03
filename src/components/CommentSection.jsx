@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Trash2, MessageCircle } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 import AuthModal from './AuthModal';
 
 const CommentSection = ({ blogSlug }) => {
+    const { user, isAuthenticated, logout } = useAuth();
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
-    const [user, setUser] = useState(null);
     const [showAuthModal, setShowAuthModal] = useState(false);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        // Check if user is logged in
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-        }
-
         // Fetch comments
         fetchComments();
     }, [blogSlug]);
@@ -33,7 +28,7 @@ const CommentSection = ({ blogSlug }) => {
     const handleSubmitComment = async (e) => {
         e.preventDefault();
 
-        if (!user) {
+        if (!isAuthenticated) {
             setShowAuthModal(true);
             return;
         }
@@ -43,11 +38,21 @@ const CommentSection = ({ blogSlug }) => {
         setLoading(true);
 
         try {
+            const token = localStorage.getItem('token');
+
+            // Check if token exists
+            if (!token || token === 'null' || token === 'undefined') {
+                alert('Your session has expired. Please log in again.');
+                setShowAuthModal(true);
+                setLoading(false);
+                return;
+            }
+
             const response = await fetch('http://localhost:5000/api/comments', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${user.token}`,
+                    'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     blogSlug,
@@ -56,14 +61,24 @@ const CommentSection = ({ blogSlug }) => {
             });
 
             if (!response.ok) {
-                throw new Error('Failed to post comment');
+                const errorData = await response.json();
+                console.error('Backend error:', errorData);
+
+                // If unauthorized, prompt to log in again
+                if (response.status === 401) {
+                    alert('Your session has expired. Please log in again.');
+                    setShowAuthModal(true);
+                    return;
+                }
+
+                throw new Error(errorData.message || 'Failed to post comment');
             }
 
             setNewComment('');
             fetchComments();
         } catch (error) {
             console.error('Error posting comment:', error);
-            alert('Failed to post comment. Please try again.');
+            alert(`Failed to post comment: ${error.message}`);
         } finally {
             setLoading(false);
         }
@@ -73,10 +88,11 @@ const CommentSection = ({ blogSlug }) => {
         if (!window.confirm('Are you sure you want to delete this comment?')) return;
 
         try {
+            const token = localStorage.getItem('token');
             const response = await fetch(`http://localhost:5000/api/comments/${commentId}`, {
                 method: 'DELETE',
                 headers: {
-                    'Authorization': `Bearer ${user.token}`,
+                    'Authorization': `Bearer ${token}`,
                 },
             });
 
@@ -91,24 +107,15 @@ const CommentSection = ({ blogSlug }) => {
         }
     };
 
-    const handleLogin = (userData) => {
-        setUser(userData);
-    };
-
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        setUser(null);
-    };
-
     return (
         <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid var(--vscode-border)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                 <h3 style={{ color: 'var(--text-bright)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <MessageCircle size={20} /> Comments ({comments.length})
                 </h3>
-                {user && (
+                {isAuthenticated && (
                     <button
-                        onClick={handleLogout}
+                        onClick={logout}
                         className="btn btn-secondary"
                         style={{ fontSize: '0.9rem', padding: '0.5rem 1rem' }}
                     >
@@ -122,8 +129,8 @@ const CommentSection = ({ blogSlug }) => {
                 <textarea
                     value={newComment}
                     onChange={(e) => setNewComment(e.target.value)}
-                    placeholder={user ? "Write a comment..." : "Please login to comment"}
-                    disabled={!user}
+                    placeholder={isAuthenticated ? "Write a comment..." : "Please login to comment"}
+                    disabled={!isAuthenticated}
                     style={{
                         width: '100%',
                         minHeight: '100px',
@@ -140,12 +147,12 @@ const CommentSection = ({ blogSlug }) => {
                 <div style={{ display: 'flex', gap: '1rem' }}>
                     <button
                         type="submit"
-                        disabled={loading || !user}
+                        disabled={loading || !isAuthenticated}
                         className="btn btn-primary"
                     >
                         {loading ? 'Posting...' : 'Post Comment'}
                     </button>
-                    {!user && (
+                    {!isAuthenticated && (
                         <button
                             type="button"
                             onClick={() => setShowAuthModal(true)}
@@ -181,7 +188,7 @@ const CommentSection = ({ blogSlug }) => {
                                         {new Date(comment.createdAt).toLocaleDateString()}
                                     </span>
                                 </div>
-                                {user && user._id === comment.user && (
+                                {user && user.id === comment.user && (
                                     <button
                                         onClick={() => handleDeleteComment(comment._id)}
                                         style={{
@@ -206,7 +213,6 @@ const CommentSection = ({ blogSlug }) => {
             <AuthModal
                 isOpen={showAuthModal}
                 onClose={() => setShowAuthModal(false)}
-                onLogin={handleLogin}
             />
         </div>
     );

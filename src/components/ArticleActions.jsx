@@ -20,6 +20,13 @@ const ArticleActions = ({ blogId, blogSlug }) => {
     const checkUserActions = async () => {
         try {
             const token = localStorage.getItem('token');
+
+            // Validate token
+            if (!token || token === 'null' || token === 'undefined') {
+                console.log('No valid token found');
+                return;
+            }
+
             const { data } = await axios.get(`http://localhost:5000/api/users/${user.username}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
@@ -28,6 +35,7 @@ const ArticleActions = ({ blogId, blogSlug }) => {
             setBookmarked(data.bookmarks?.some(b => b.blogId === blogId));
         } catch (error) {
             console.error('Error checking user actions:', error);
+            // Silently fail - user can still interact with buttons
         }
     };
 
@@ -39,6 +47,13 @@ const ArticleActions = ({ blogId, blogSlug }) => {
 
         try {
             const token = localStorage.getItem('token');
+
+            // Validate token
+            if (!token || token === 'null' || token === 'undefined') {
+                showToastMessage('Session expired. Please log in again.');
+                return;
+            }
+
             const { data } = await axios.post(
                 'http://localhost:5000/api/users/like',
                 { blogId, blogSlug },
@@ -54,6 +69,13 @@ const ArticleActions = ({ blogId, blogSlug }) => {
             showToastMessage(data.message);
         } catch (error) {
             console.error('Error liking article:', error);
+
+            // Handle authentication errors
+            if (error.response?.status === 401) {
+                showToastMessage('Session expired. Please log in again.');
+            } else {
+                showToastMessage(error.response?.data?.message || 'Failed to like article');
+            }
         }
     };
 
@@ -65,6 +87,13 @@ const ArticleActions = ({ blogId, blogSlug }) => {
 
         try {
             const token = localStorage.getItem('token');
+
+            // Validate token
+            if (!token || token === 'null' || token === 'undefined') {
+                showToastMessage('Session expired. Please log in again.');
+                return;
+            }
+
             const { data } = await axios.post(
                 'http://localhost:5000/api/users/bookmark',
                 { blogId, blogSlug },
@@ -75,6 +104,13 @@ const ArticleActions = ({ blogId, blogSlug }) => {
             showToastMessage(data.message);
         } catch (error) {
             console.error('Error bookmarking article:', error);
+
+            // Handle authentication errors
+            if (error.response?.status === 401) {
+                showToastMessage('Session expired. Please log in again.');
+            } else {
+                showToastMessage(error.response?.data?.message || 'Failed to bookmark article');
+            }
         }
     };
 
