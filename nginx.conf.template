@@ -22,15 +22,8 @@ server {
         add_header Cache-Control "public, immutable";
     }
 
-    # Proxy API requests to backend
-    location /api {
-        proxy_pass ${BACKEND_URL};
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
+    # API requests are handled by the backend URL configured at build time
+    # No proxy needed - the frontend makes direct requests to the backend
 
     # Handle React Router (SPA)
     location / {
