@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Home, User, Briefcase, FileText, Mail, Star, TrendingUp, Search, Bookmark, LogIn, LogOut, Menu, X, Users, Shield } from 'lucide-react';
+import { Home, User, Briefcase, FileText, Mail, Star, TrendingUp, Search, Bookmark, LogIn, LogOut, Menu, X, Users, Shield, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import AuthModal from './AuthModal';
 import './Sidebar.css';
 
-const Sidebar = () => {
+import ThemeToggle from './ThemeToggle';
+
+const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed }) => {
   const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('home');
@@ -54,12 +56,26 @@ const Sidebar = () => {
         {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
 
-      <aside className={`sidebar ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
+      <button
+        className="sidebar-toggle-btn"
+        onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+        aria-label="Toggle sidebar"
+        title={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+      >
+        {isSidebarCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
+      </button>
+
+      <aside className={`sidebar ${isMobileMenuOpen ? 'mobile-open' : ''} ${isSidebarCollapsed ? 'collapsed' : ''}`}>
         <div className="sidebar-header">
-          <Link to="/" className="sidebar-logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            {/* <img src="/logo.svg" alt="CodeBlog Logo" style={{ width: '32px', height: '32px' }} /> */}
-            <span>Coffee & Code</span>
-          </Link>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: '1rem' }}>
+            <Link to="/" className="sidebar-logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              {/* <img src="/logo.svg" alt="CodeBlog Logo" style={{ width: '32px', height: '32px' }} /> */}
+              <span>C3</span>
+            </Link>
+            <div className="theme-toggle-wrapper" style={{ transform: 'scale(0.6)' }}>
+              <ThemeToggle />
+            </div>
+          </div>
           {isAuthenticated && user && user.username && (
             <Link
               to={`/profile/${user.username}`}

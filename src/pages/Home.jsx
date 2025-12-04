@@ -37,9 +37,8 @@ const Home = () => {
                         lineHeight: '1.8',
                         marginTop: '1rem'
                     }}>
-                        Welcome to CodeBlog, your premium destination for cutting-edge development tutorials
-                        and insights. We're passionate about sharing knowledge and helping developers level up
-                        their skills with practical, real-world code examples.
+                        I write about code the way I understand it — slowly, honestly, and without pretending I know everything.
+                        If you’re figuring things out one concept at a time, we’re already on the same page
                     </p>
                     <p style={{
                         fontSize: '1.1rem',

@@ -17,6 +17,7 @@ import AllProjects from './pages/AllProjects';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   useEffect(() => {
     // Simulate initial loading
@@ -34,9 +35,12 @@ function App() {
 
 
       <div className="app-container">
-        <Sidebar />
+        <Sidebar
+          isSidebarCollapsed={isSidebarCollapsed}
+          setIsSidebarCollapsed={setIsSidebarCollapsed}
+        />
 
-        <main className="main-content">
+        <main className={`main-content ${isSidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/blogs" element={<AllBlogs />} />
