@@ -56,16 +56,17 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed }) => {
         {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
 
-      <button
-        className="sidebar-toggle-btn"
-        onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-        aria-label="Toggle sidebar"
-        title={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-      >
-        {isSidebarCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
-      </button>
-
       <aside className={`sidebar ${isMobileMenuOpen ? 'mobile-open' : ''} ${isSidebarCollapsed ? 'collapsed' : ''}`}>
+        {/* Sidebar Toggle Button - Now inside sidebar */}
+        <button
+          className="sidebar-toggle-btn"
+          onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+          aria-label="Toggle sidebar"
+          title={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+        >
+          {isSidebarCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+        </button>
+
         <div className="sidebar-header">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: '1rem' }}>
             <Link to="/" className="sidebar-logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>

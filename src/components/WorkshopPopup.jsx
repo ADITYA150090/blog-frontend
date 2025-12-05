@@ -7,6 +7,8 @@ const WorkshopPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [popupData, setPopupData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [canClose, setCanClose] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(5);
 
   useEffect(() => {
     const fetchPopup = async () => {
@@ -30,8 +32,38 @@ const WorkshopPopup = () => {
     fetchPopup();
   }, []);
 
+  // Lock body scroll when popup is visible
+  useEffect(() => {
+    if (isVisible) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+
+      // Countdown timer for close button
+      const countdown = setInterval(() => {
+        setTimeLeft((prev) => {
+          if (prev <= 1) {
+            setCanClose(true);
+            clearInterval(countdown);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+
+      return () => {
+        clearInterval(countdown);
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+      };
+    }
+  }, [isVisible]);
+
   const handleClose = () => {
-    setIsVisible(false);
+    if (canClose) {
+      setIsVisible(false);
+    }
   };
 
   const handleButtonClick = () => {
@@ -42,22 +74,45 @@ const WorkshopPopup = () => {
 
   if (loading || !isVisible || !popupData) return null;
 
-  const { title, tag, description, features, price, buttonText, colors } = popupData;
+  const { title, tag, description, features, price, buttonText, colors, adContent } = popupData;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+    <div
+      className="popup-overlay"
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 9999,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        backdropFilter: 'blur(8px)',
+        padding: '1rem'
+      }}
+    >
       <div className="card relative" style={{
         '--primary': colors?.primary || '#ff3e00',
         '--secondary': colors?.secondary || '#4d61ff',
         '--accent': colors?.accent || '#00e0b0'
       }}>
-        {/* Close Button */}
+        {/* Close Button with Timer - LARGER SIZE */}
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 z-50 w-8 h-8 flex items-center justify-center bg-white border-2 border-black rounded-full hover:bg-red-500 hover:text-white transition-all duration-200 font-bold text-xl"
-          style={{ boxShadow: '0.2em 0.2em 0 #000' }}
+          disabled={!canClose}
+          className="absolute top-4 right-4 z-50 w-14 h-14 flex items-center justify-center bg-white border-2 border-black rounded-full hover:bg-red-500 hover:text-white transition-all duration-200 font-bold text-2xl"
+          style={{
+            boxShadow: '0.3em 0.3em 0 #000',
+            cursor: canClose ? 'pointer' : 'not-allowed',
+            opacity: canClose ? 1 : 0.6,
+            fontSize: canClose ? '2rem' : '1.5rem'
+          }}
+          title={canClose ? 'Close' : `Wait ${timeLeft}s`}
         >
-          ×
+          {canClose ? '×' : timeLeft}
         </button>
 
         <div className="card-pattern-grid"></div>
@@ -84,6 +139,29 @@ const WorkshopPopup = () => {
           <div className="card-description">
             {description}
           </div>
+
+          {/* Ad Content Section */}
+          {adContent && (
+            <div className="popup-ad-section" style={{
+              margin: '1em 0',
+              padding: '1em',
+              background: 'rgba(255, 215, 0, 0.1)',
+              border: '2px solid #FFD700',
+              borderRadius: '0.5em',
+              textAlign: 'center'
+            }}>
+              <div style={{
+                fontSize: '0.7em',
+                color: '#888',
+                marginBottom: '0.5em',
+                textTransform: 'uppercase',
+                letterSpacing: '0.1em'
+              }}>
+                Advertisement
+              </div>
+              <div dangerouslySetInnerHTML={{ __html: adContent }} />
+            </div>
+          )}
 
           {features && features.length > 0 && (
             <div className="feature-grid">
@@ -527,7 +605,7 @@ const WorkshopPopup = () => {
           z-index: 1;
         }
       `}</style>
-    </div>
+    </div >
   );
 };
 

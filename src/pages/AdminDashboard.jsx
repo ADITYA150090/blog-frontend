@@ -27,7 +27,10 @@ const AdminDashboard = () => {
     const [newsletterForm, setNewsletterForm] = useState({
         subject: '', body: ''
     });
-    const [showPreview, setShowPreview] = useState(false);
+    const [blogs, setBlogs] = useState([]);
+    const [drafts, setDrafts] = useState([]);
+    const [isEditing, setIsEditing] = useState(false);
+    const [editingBlogId, setEditingBlogId] = useState(null);
 
     useEffect(() => {
         if (user && user.role !== 'admin') {
@@ -48,11 +51,66 @@ const AdminDashboard = () => {
             const usersRes = await axios.get(`${API_BASE}/admin/users`, config);
             setUsers(usersRes.data);
 
+            await fetchBlogs();
+            await fetchDrafts();
+
             setLoading(false);
         } catch (error) {
             console.error('Error fetching admin data:', error);
             setLoading(false);
         }
+    };
+
+    const fetchBlogs = async () => {
+        try {
+            const response = await axios.get(`${API_BASE}/blogs/all`);
+            setBlogs(response.data);
+        } catch (error) {
+            console.error('Error fetching blogs:', error);
+        }
+    };
+
+    const fetchDrafts = async () => {
+        try {
+            const response = await axios.get(`${API_BASE}/blogs/drafts`);
+            setDrafts(response.data);
+        } catch (error) {
+            console.error('Error fetching drafts:', error);
+        }
+    };
+
+    const handleEditBlog = async (id) => {
+        try {
+            const response = await axios.get(`${API_BASE}/blogs/edit/${id}`);
+            const blog = response.data;
+
+            setBlogForm({
+                title: blog.title,
+                excerpt: blog.excerpt,
+                content: blog.content,
+                category: blog.category,
+                tags: blog.tags.join(', '),
+                coverImage: blog.coverImage || '',
+                youtubeLink: blog.youtubeLink || ''
+            });
+
+            setIsEditing(true);
+            setEditingBlogId(id);
+            setActiveTab('blogs');
+            setMessage('');
+        } catch (error) {
+            console.error('Error fetching blog for editing:', error);
+            setMessage('Error loading blog for editing');
+        }
+    };
+
+    const handleCancelEdit = () => {
+        setIsEditing(false);
+        setEditingBlogId(null);
+        setBlogForm({
+            title: '', excerpt: '', content: '', category: 'Technology', tags: '', coverImage: '', youtubeLink: ''
+        });
+        setMessage('');
     };
 
     const handleDeleteUser = async (id) => {
@@ -69,19 +127,44 @@ const AdminDashboard = () => {
         }
     };
 
-    const handleBlogSubmit = async (e) => {
+    const handleBlogSubmit = async (e, saveAsDraft = false) => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            await axios.post(`${API_BASE}/admin/blogs`, blogForm, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            setMessage('Blog post created successfully!');
+            const config = { headers: { Authorization: `Bearer ${token}` } };
+
+            const blogData = {
+                ...blogForm,
+                status: saveAsDraft ? 'draft' : 'published'
+            };
+
+            if (isEditing && editingBlogId) {
+                await axios.put(`${API_BASE}/admin/blogs/${editingBlogId}`, blogData, config);
+                setMessage(`Blog ${saveAsDraft ? 'saved as draft' : 'updated'} successfully!`);
+            } else {
+                await axios.post(`${API_BASE}/admin/blogs`, blogData, config);
+                setMessage(`Blog ${saveAsDraft ? 'saved as draft' : 'created'} successfully!`);
+            }
+
             setBlogForm({ title: '', excerpt: '', content: '', category: 'Technology', tags: '', coverImage: '', youtubeLink: '' });
-            fetchData();
+            setIsEditing(false);
+            setEditingBlogId(null);
+
+            await fetchBlogs();
+            await fetchDrafts();
+            await fetchData();
         } catch (error) {
-            setMessage('Error creating blog post');
+            setMessage(`Error ${isEditing ? 'updating' : 'creating'} blog post`);
+            console.error('Blog submit error:', error);
         }
+    };
+
+    const handleSaveAsDraft = (e) => {
+        handleBlogSubmit(e, true);
+    };
+
+    const handlePublish = (e) => {
+        handleBlogSubmit(e, false);
     };
 
     const handleProjectSubmit = async (e) => {
@@ -182,59 +265,129 @@ const AdminDashboard = () => {
                 )}
 
                 {activeTab === 'blogs' && (
-                    <div className="form-container">
-                        <h2>Create New Blog Post</h2>
-                        <form onSubmit={handleBlogSubmit} className="admin-form">
-                            <div className="form-group">
-                                <label>Title</label>
-                                <input type="text" value={blogForm.title} onChange={e => setBlogForm({ ...blogForm, title: e.target.value })} required />
-                            </div>
-                            <div className="form-group">
-                                <label>Excerpt</label>
-                                <textarea value={blogForm.excerpt} onChange={e => setBlogForm({ ...blogForm, excerpt: e.target.value })} required />
-                            </div>
-                            <div className="form-group">
-                                <label>Content (HTML/Markdown)</label>
-                                <RichTextEditor
-                                    value={blogForm.content}
-                                    onChange={e => setBlogForm({ ...blogForm, content: e.target.value })}
-                                />
-                            </div>
-                            <div className="form-row">
-                                <div className="form-group">
-                                    <label>Category</label>
-                                    <select value={blogForm.category} onChange={e => setBlogForm({ ...blogForm, category: e.target.value })}>
-                                        <option>Technology</option><option>Design</option><option>Tutorial</option><option>Career</option>
-                                    </select>
-                                </div>
-                                <div className="form-group">
-                                    <label>Tags (comma separated)</label>
-                                    <input type="text" value={blogForm.tags} onChange={e => setBlogForm({ ...blogForm, tags: e.target.value })} />
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <label>Cover Image URL</label>
-                                <input type="url" value={blogForm.coverImage} onChange={e => setBlogForm({ ...blogForm, coverImage: e.target.value })} />
-                            </div>
-                            <div className="form-group">
-                                <label>YouTube Link (optional)</label>
-                                <input type="url" value={blogForm.youtubeLink} onChange={e => setBlogForm({ ...blogForm, youtubeLink: e.target.value })} placeholder="https://youtube.com/watch?v=..." />
-                            </div>
-                            <div className="form-actions">
-                                <button type="submit" className="btn-submit">Create Blog Post</button>
-                                <button
-                                    type="button"
-                                    className="btn-preview"
-                                    onClick={() => setShowPreview(!showPreview)}
-                                >
-                                    {showPreview ? '✏️ Edit' : '👁️ Preview'}
-                                </button>
-                            </div>
-                        </form>
+                    <div className="blog-editor-container">
+                        <h2>{isEditing ? 'Edit Blog Post' : 'Create New Blog Post'}</h2>
+                        {isEditing && <p style={{ color: 'var(--vscode-blue)' }}>Editing blog ID: {editingBlogId}</p>}
 
-                        {showPreview && blogForm.content && (
-                            <ContentPreview content={blogForm.content} />
-                        )}
+                        <div className="editor-split-view">
+                            {/* Left Side - Form */}
+                            <div className="editor-form-side">
+                                <form onSubmit={handlePublish} className="admin-form">
+                                    <div className="form-group">
+                                        <label>Title</label>
+                                        <input type="text" value={blogForm.title} onChange={e => setBlogForm({ ...blogForm, title: e.target.value })} required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Excerpt</label>
+                                        <textarea value={blogForm.excerpt} onChange={e => setBlogForm({ ...blogForm, excerpt: e.target.value })} required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Content (HTML/Markdown)</label>
+                                        <RichTextEditor
+                                            value={blogForm.content}
+                                            onChange={e => setBlogForm({ ...blogForm, content: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="form-row">
+                                        <div className="form-group">
+                                            <label>Category</label>
+                                            <select value={blogForm.category} onChange={e => setBlogForm({ ...blogForm, category: e.target.value })}>
+                                                <option>Technology</option><option>Design</option><option>Tutorial</option><option>Career</option>
+                                            </select>
+                                        </div>
+                                        <div className="form-group">
+                                            <label>Tags (comma separated)</label>
+                                            <input type="text" value={blogForm.tags} onChange={e => setBlogForm({ ...blogForm, tags: e.target.value })} />
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Cover Image URL</label>
+                                        <input type="url" value={blogForm.coverImage} onChange={e => setBlogForm({ ...blogForm, coverImage: e.target.value })} />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>YouTube Link (optional)</label>
+                                        <input type="url" value={blogForm.youtubeLink} onChange={e => setBlogForm({ ...blogForm, youtubeLink: e.target.value })} placeholder="https://youtube.com/watch?v=..." />
+                                    </div>
+                                    <div className="form-actions">
+                                        <button type="submit" className="btn-submit">{isEditing ? 'Update Blog' : 'Publish Blog'}</button>
+                                        <button type="button" className="btn-warning" onClick={handleSaveAsDraft}>💾 Save as Draft</button>
+                                        {isEditing && <button type="button" className="btn-secondary" onClick={handleCancelEdit}>✖️ Cancel</button>}
+                                    </div>
+                                </form>
+                            </div>
+
+                            {/* Right Side - Live Preview */}
+                            <div className="editor-preview-side">
+                                <div className="preview-header-sticky">
+                                    <h3>📋 Live Preview</h3>
+                                    <small>Updates as you type</small>
+                                </div>
+                                {blogForm.content ? (
+                                    <ContentPreview content={blogForm.content} />
+                                ) : (
+                                    <div className="preview-empty-state">
+                                        <p>👈 Start writing to see preview</p>
+                                        <small>Your content will appear here in real-time</small>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Existing Blogs List */}
+                        <div className="blogs-management">
+                            <h3>All Published Blogs ({blogs.filter(b => b.status === 'published').length})</h3>
+                            <div className="users-table-container">
+                                <table className="users-table">
+                                    <thead>
+                                        <tr><th>Title</th><th>Category</th><th>Views</th><th>Created</th><th>Actions</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        {blogs.filter(b => b.status === 'published').map(blog => (
+                                            <tr key={blog._id}>
+                                                <td>{blog.title}</td>
+                                                <td>{blog.category}</td>
+                                                <td>{blog.views || 0}</td>
+                                                <td>{new Date(blog.createdAt).toLocaleDateString()}</td>
+                                                <td>
+                                                    <button className="btn-submit" style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }} onClick={() => handleEditBlog(blog._id)}>✏️ Edit</button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        {/* Drafts List */}
+                        <div className="blogs-management">
+                            <h3>Draft Blogs ({drafts.length})</h3>
+                            <div className="users-table-container">
+                                <table className="users-table">
+                                    <thead>
+                                        <tr><th>Title</th><th>Category</th><th>Last Modified</th><th>Actions</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        {drafts.map(draft => (
+                                            <tr key={draft._id}>
+                                                <td>{draft.title}</td>
+                                                <td>{draft.category}</td>
+                                                <td>{new Date(draft.updatedAt).toLocaleDateString()}</td>
+                                                <td>
+                                                    <button className="btn-submit" style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }} onClick={() => handleEditBlog(draft._id)}>✏️ Edit & Publish</button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                        {drafts.length === 0 && (
+                                            <tr>
+                                                <td colSpan="4" style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
+                                                    No drafts yet. Save a blog as draft to see it here!
+                                                </td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 )}
 

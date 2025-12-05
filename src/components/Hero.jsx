@@ -14,12 +14,8 @@ const Hero = () => {
                     </h1>
 
                     <p className="hero-subtitle">
-                        I talk about code, system design, and software architecture — the real backbone of software.
-                        Some days we'll dive deep into DSA; other days, we'll chill and explore the surface web with HTML and fellow creators.
-
-                        If you're someone who understands the internet beyond scrolling…
-                        Welcome. Let's connect.
-                    </p>
+                        Welcome to my personal Code diaries , here i put all bullshit about code and other related topics
+                        which are around Carrier and life realated, I see things as Coder every where , the human specias who hard to get Friend also consider as more intellectual                     </p>
 
                     <div className="hero-cta">
                         <button className="btn btn-primary" onClick={() => {

@@ -774,6 +774,8 @@ body {
 
 .footer-links {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .footer-link {
@@ -782,16 +784,19 @@ body {
   display: block;
   padding: var(--spacing-xs) 0;
   transition: color var(--transition-fast);
+  font-size: 0.95rem;
 }
 
 .footer-link:hover {
   color: var(--vscode-blue);
+  padding-left: 0.5rem;
 }
 
 .social-links {
   display: flex;
   gap: var(--spacing-md);
   margin-top: var(--spacing-md);
+  flex-wrap: wrap;
 }
 
 .social-link {
@@ -805,6 +810,8 @@ body {
   color: var(--text-primary);
   text-decoration: none;
   transition: all var(--transition-fast);
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 .social-link:hover {
@@ -820,6 +827,12 @@ body {
   text-align: center;
   color: var(--text-dim);
   font-size: 0.9rem;
+}
+
+.footer-bottom p {
+  margin: 0;
+  padding: 0 var(--spacing-md);
+  line-height: 1.6;
 }
 
 /* ==========================================
@@ -938,13 +951,63 @@ body {
     width: 100%;
   }
 
+  /* Footer mobile styles */
+  .footer {
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+
   .footer-content {
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);
+    text-align: center;
+  }
+
+  .footer-section {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .footer-section:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .footer-title {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .footer-links {
+    padding: var(--spacing-sm) 0;
+  }
+
+  .footer-link {
+    padding: var(--spacing-sm) 0;
+    font-size: 0.9rem;
+  }
+
+  .footer-link:hover {
+    padding-left: 0;
   }
 
   .social-links {
     justify-content: center;
+    gap: var(--spacing-sm);
+  }
+
+  .social-link {
+    width: 36px;
+    height: 36px;
+    font-size: 0.8rem;
+  }
+
+  .footer-bottom {
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    font-size: 0.85rem;
+  }
+
+  .footer-bottom p {
+    padding: 0 var(--spacing-sm);
+    line-height: 1.4;
   }
 
   /* Make code blocks scrollable on mobile */
@@ -993,6 +1056,35 @@ body {
 
   .nav-item {
     font-size: 0.85rem;
+  }
+
+  /* Footer for very small screens */
+  .footer {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+
+  .footer-title {
+    font-size: 1rem;
+  }
+
+  .footer-link {
+    font-size: 0.85rem;
+    padding: 0.4rem 0;
+  }
+
+  .social-link {
+    width: 32px;
+    height: 32px;
+    font-size: 0.75rem;
+  }
+
+  .footer-bottom {
+    font-size: 0.8rem;
+  }
+
+  .footer-bottom p {
+    font-size: 0.75rem;
+    word-break: break-word;
   }
 }
 

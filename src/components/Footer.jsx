@@ -7,9 +7,9 @@ const Footer = () => {
         <footer id="contact" className="footer">
             <div className="footer-content">
                 <div className="footer-section">
-                    <h3 className="footer-title">CodeBlog</h3>
-                    <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
-                        Empowering developers with cutting-edge tutorials and insights.
+                    <h3 className="footer-title">dev</h3>
+                    <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem', fontSize: '0.9rem' }}>
+                        Empowering developers with tutorials and insights.
                     </p>
                     <div className="social-links">
                         <a href="https://github.com" className="social-link" target="_blank" rel="noopener noreferrer">
