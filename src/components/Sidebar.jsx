@@ -143,11 +143,11 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed }) => {
             </Link>
           </div>
 
-          {/* {isAuthenticated && (
+          {isAuthenticated && (
             <div className="nav-section">
-              <div className="nav-section-title">Personal</div>
+              {/* <div className="nav-section-title">Personal</div> */}
 
-              {user.username && (
+              {/* {user.username && (
                 <Link
                   to={`/profile/${user.username}`}
                   className="nav-item"
@@ -167,7 +167,7 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed }) => {
                   <Bookmark className="nav-icon" size={18} />
                   <span>Bookmarks</span>
                 </Link>
-              )}
+              )} */}
 
               {user.role === 'admin' && (
                 <Link
@@ -180,7 +180,7 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed }) => {
                 </Link>
               )}
             </div>
-          )} */}
+          )}
 
           <div className="nav-section">
             <div className="nav-section-title"></div>

@@ -15,6 +15,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import AllBlogs from './pages/AllBlogs';
 import AllProjects from './pages/AllProjects';
 import HowToWrite from './pages/HowToWrite';
+import NotFound from './pages/NotFound';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -52,6 +53,8 @@ function App() {
             <Route path="/search" element={<SearchPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/how-to-write" element={<HowToWrite />} />
+            {/* 404 Page - Must be last */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
 
           <Footer />
