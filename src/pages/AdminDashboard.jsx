@@ -4,6 +4,8 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE } from '../config/api.config';
 import PopupManager from '../components/PopupManager';
+import RichTextEditor from '../components/RichTextEditor';
+import ContentPreview from '../components/ContentPreview';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -25,6 +27,7 @@ const AdminDashboard = () => {
     const [newsletterForm, setNewsletterForm] = useState({
         subject: '', body: ''
     });
+    const [showPreview, setShowPreview] = useState(false);
 
     useEffect(() => {
         if (user && user.role !== 'admin') {
@@ -192,7 +195,10 @@ const AdminDashboard = () => {
                             </div>
                             <div className="form-group">
                                 <label>Content (HTML/Markdown)</label>
-                                <textarea className="content-area" value={blogForm.content} onChange={e => setBlogForm({ ...blogForm, content: e.target.value })} required />
+                                <RichTextEditor
+                                    value={blogForm.content}
+                                    onChange={e => setBlogForm({ ...blogForm, content: e.target.value })}
+                                />
                             </div>
                             <div className="form-row">
                                 <div className="form-group">
@@ -214,8 +220,21 @@ const AdminDashboard = () => {
                                 <label>YouTube Link (optional)</label>
                                 <input type="url" value={blogForm.youtubeLink} onChange={e => setBlogForm({ ...blogForm, youtubeLink: e.target.value })} placeholder="https://youtube.com/watch?v=..." />
                             </div>
-                            <button type="submit" className="btn-submit">Create Blog Post</button>
+                            <div className="form-actions">
+                                <button type="submit" className="btn-submit">Create Blog Post</button>
+                                <button
+                                    type="button"
+                                    className="btn-preview"
+                                    onClick={() => setShowPreview(!showPreview)}
+                                >
+                                    {showPreview ? '✏️ Edit' : '👁️ Preview'}
+                                </button>
+                            </div>
                         </form>
+
+                        {showPreview && blogForm.content && (
+                            <ContentPreview content={blogForm.content} />
+                        )}
                     </div>
                 )}
 

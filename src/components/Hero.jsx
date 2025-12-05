@@ -10,7 +10,7 @@ const Hero = () => {
                     </div>
 
                     <h1 className="hero-title">
-                        CODE ,COFFEE<br />& connect
+                        Read Blogs<br /> or turn on light mode
                     </h1>
 
                     <p className="hero-subtitle">

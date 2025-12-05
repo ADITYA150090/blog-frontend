@@ -37,7 +37,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                 }, 1000);
             } else {
                 await register(formData.name, formData.email, formData.password);
-                setMessage('Registration successful! Please check your email to verify.');
+                setMessage('Registration successful! You can login now.');
                 setFormData({ name: '', email: '', password: '' });
             }
         } catch (err) {

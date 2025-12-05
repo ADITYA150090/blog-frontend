@@ -1,0 +1,113 @@
+.content-preview {
+    margin-top: 2rem;
+    border: 1px solid var(--vscode-border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--bg-secondary);
+}
+
+.preview-header {
+    padding: 1rem 1.5rem;
+    background: var(--bg-primary);
+    border-bottom: 2px solid var(--vscode-blue);
+}
+
+.preview-header h3 {
+    color: var(--text-bright);
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+}
+
+.preview-header p {
+    color: var(--text-secondary);
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.preview-content {
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    color: var(--text-primary);
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+/* Blog content styles (matching BlogDetail.css) */
+.preview-content h2 {
+    font-size: 1.8rem;
+    color: var(--text-bright);
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--vscode-blue);
+}
+
+.preview-content h3 {
+    font-size: 1.4rem;
+    color: var(--vscode-blue);
+    margin: 1.5rem 0 1rem;
+}
+
+.preview-content p {
+    margin-bottom: 1rem;
+}
+
+.preview-content ul,
+.preview-content ol {
+    margin: 1rem 0;
+    padding-left: 2rem;
+}
+
+.preview-content li {
+    margin: 0.5rem 0;
+}
+
+.preview-content blockquote {
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    border-left: 4px solid var(--vscode-blue);
+    background: rgba(94, 129, 244, 0.1);
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+.preview-content a {
+    color: var(--vscode-blue);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.preview-content a:hover {
+    border-bottom-color: var(--vscode-blue);
+}
+
+.preview-content strong {
+    color: var(--text-bright);
+    font-weight: 600;
+}
+
+.preview-content em {
+    font-style: italic;
+}
+
+.preview-content hr {
+    margin: 2rem 0;
+    border: none;
+    border-top: 1px solid var(--vscode-border);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .preview-content {
+        padding: 1rem;
+    }
+
+    .preview-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .preview-content h3 {
+        font-size: 1.2rem;
+    }
+}

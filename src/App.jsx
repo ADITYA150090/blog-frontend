@@ -14,6 +14,7 @@ import SearchPage from './pages/SearchPage';
 import AdminDashboard from './pages/AdminDashboard';
 import AllBlogs from './pages/AllBlogs';
 import AllProjects from './pages/AllProjects';
+import HowToWrite from './pages/HowToWrite';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -50,6 +51,7 @@ function App() {
             <Route path="/profile/:username" element={<UserProfile />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/how-to-write" element={<HowToWrite />} />
           </Routes>
 
           <Footer />

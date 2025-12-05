@@ -42,6 +42,13 @@ const BlogDetail = () => {
         }
     }, [slug]);
 
+    // Apply syntax highlighting after content is loaded
+    useEffect(() => {
+        if (blog && window.Prism) {
+            window.Prism.highlightAll();
+        }
+    }, [blog]);
+
     if (loading) {
         return <RocketLoader isLoading={true} />;
     }

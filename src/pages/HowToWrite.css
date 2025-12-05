@@ -1,0 +1,320 @@
+.how-to-write-page {
+    min-height: 100vh;
+    padding: 2rem;
+    background: var(--bg-primary);
+}
+
+.guide-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.guide-header {
+    text-align: center;
+    padding: 3rem 0;
+    border-bottom: 2px solid var(--vscode-border);
+    margin-bottom: 3rem;
+}
+
+.guide-header h1 {
+    font-size: 3rem;
+    color: var(--text-bright);
+    margin-bottom: 1rem;
+}
+
+.guide-header p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+.guide-section {
+    margin-bottom: 4rem;
+    padding: 2rem;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    border: 1px solid var(--vscode-border);
+}
+
+.guide-section h2 {
+    font-size: 2rem;
+    color: var(--text-bright);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--vscode-blue);
+}
+
+.guide-section h3 {
+    font-size: 1.5rem;
+    color: var(--vscode-blue);
+    margin: 2rem 0 1rem;
+}
+
+.guide-section h4 {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin: 1.5rem 0 1rem;
+}
+
+.guide-content {
+    color: var(--text-primary);
+    line-height: 1.8;
+}
+
+.guide-content p {
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+}
+
+.code-example {
+    background: #1e1e1e;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 1px solid #3e3e3e;
+}
+
+.code-example h4 {
+    color: #9cdcfe;
+    margin-top: 0;
+}
+
+.code-example pre {
+    background: #0e0e0e;
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    color: #d4d4d4;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.guide-demo {
+    background: var(--bg-primary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 2px dashed var(--vscode-border);
+}
+
+.guide-demo h4 {
+    color: var(--vscode-blue);
+    margin-top: 0;
+}
+
+.tips {
+    background: linear-gradient(135deg, rgba(94, 129, 244, 0.1), rgba(142, 84, 233, 0.1));
+    border-left: 4px solid var(--vscode-blue);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.tips h4 {
+    color: var(--vscode-blue);
+    margin-top: 0;
+}
+
+.tips ul {
+    margin: 1rem 0 0 1.5rem;
+}
+
+.tips li {
+    margin: 0.5rem 0;
+    color: var(--text-primary);
+}
+
+.ad-strategy {
+    background: var(--bg-primary);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+}
+
+.ad-strategy h4 {
+    color: var(--text-bright);
+    margin-top: 0;
+}
+
+.strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.strategy-item {
+    background: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--vscode-border);
+}
+
+.strategy-item strong {
+    color: var(--vscode-blue);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.strategy-item p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.tip-card {
+    background: var(--bg-primary);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--vscode-border);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tip-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(94, 129, 244, 0.2);
+}
+
+.tip-card h3 {
+    color: var(--vscode-blue);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.tip-card ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.tip-card li {
+    margin: 0.5rem 0;
+    color: var(--text-primary);
+}
+
+.html-reference {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.ref-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--bg-primary);
+    border-radius: 6px;
+    border: 1px solid var(--vscode-border);
+}
+
+.ref-item code {
+    background: #1e1e1e;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: #9cdcfe;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9rem;
+}
+
+.ref-item span {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.final-section {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(94, 129, 244, 0.1), rgba(142, 84, 233, 0.1));
+    border: 2px solid var(--vscode-blue);
+}
+
+.final-section h2 {
+    border-bottom: none;
+}
+
+.final-section p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-btn {
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-block;
+}
+
+.cta-btn.primary {
+    background: var(--vscode-blue);
+    color: white;
+}
+
+.cta-btn.primary:hover {
+    background: var(--vscode-blue-hover);
+    transform: translateY(-2px);
+}
+
+.cta-btn.secondary {
+    background: transparent;
+    color: var(--vscode-blue);
+    border: 2px solid var(--vscode-blue);
+}
+
+.cta-btn.secondary:hover {
+    background: var(--vscode-blue);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .how-to-write-page {
+        padding: 1rem;
+    }
+
+    .guide-header h1 {
+        font-size: 2rem;
+    }
+
+    .guide-header p {
+        font-size: 1rem;
+    }
+
+    .guide-section {
+        padding: 1.5rem;
+    }
+
+    .guide-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .tips-grid,
+    .strategy-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+    }
+
+    .cta-btn {
+        width: 100%;
+    }
+}

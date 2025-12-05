@@ -70,13 +70,13 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed }) => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: '1rem' }}>
             <Link to="/" className="sidebar-logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               {/* <img src="/logo.svg" alt="CodeBlog Logo" style={{ width: '32px', height: '32px' }} /> */}
-              <span>C3</span>
+              <span>dev</span>
             </Link>
             <div className="theme-toggle-wrapper" style={{ transform: 'scale(0.6)' }}>
               <ThemeToggle />
             </div>
           </div>
-          {isAuthenticated && user && user.username && (
+          {/* {isAuthenticated && user && user.username && (
             <Link
               to={`/profile/${user.username}`}
               className="sidebar-profile"
@@ -92,7 +92,7 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed }) => {
                 <div className="sidebar-user-username">@{user.username}</div>
               </div>
             </Link>
-          )}
+          )} */}
         </div>
 
         <nav className="sidebar-nav">
@@ -142,7 +142,7 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed }) => {
             </Link>
           </div>
 
-          {isAuthenticated && (
+          {/* {isAuthenticated && (
             <div className="nav-section">
               <div className="nav-section-title">Personal</div>
 
@@ -179,10 +179,10 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed }) => {
                 </Link>
               )}
             </div>
-          )}
+          )} */}
 
           <div className="nav-section">
-            <div className="nav-section-title">Discover</div>
+            <div className="nav-section-title"></div>
 
             {/* <div className="nav-item">
               <Star className="nav-icon" size={18} />
@@ -194,14 +194,14 @@ const Sidebar = ({ isSidebarCollapsed, setIsSidebarCollapsed }) => {
               <span>Trending</span>
             </div> */}
 
-            <Link
+            {/* <Link
               to="/search"
               className="nav-item"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <Users className="nav-icon" size={18} />
               <span>Find Users</span>
-            </Link>
+            </Link> */}
           </div>
 
           <div className="nav-section">
