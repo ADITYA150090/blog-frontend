@@ -10,6 +10,7 @@ import ReadingProgress from '../components/ReadingProgress';
 import ArticleActions from '../components/ArticleActions';
 import CodePlayground from '../components/CodePlayground';
 import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
+import './BlogDetail.css';
 
 const BlogDetail = () => {
     const { slug } = useParams();
@@ -55,7 +56,7 @@ const BlogDetail = () => {
 
     if (!blog) {
         return (
-            <div style={{ padding: '4rem 2rem', textAlign: 'center', color: 'var(--text-primary)' }}>
+            <div className="blog-detail-container" style={{ textAlign: 'center' }}>
                 <h2>Blog post not found</h2>
                 <Link to="/" className="btn btn-secondary" style={{ marginTop: '1rem' }}>
                     Back to Home
@@ -72,80 +73,46 @@ const BlogDetail = () => {
             {/* Reading Progress Tracker */}
             <ReadingProgress blogId={blog._id || blog.id} blogSlug={slug} />
 
-            <div style={{ padding: '4rem 2rem', maxWidth: '900px', margin: '0 auto' }}>
-                <Link to="/" style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    color: 'var(--vscode-blue)',
-                    textDecoration: 'none',
-                    marginBottom: '2rem'
-                }}>
+            <div className="blog-detail-container">
+                <Link to="/" className="blog-back-link">
                     <ArrowLeft size={16} /> Back to Home
                 </Link>
 
                 <article>
                     {(blog.image || blog.coverImage) && (
-                        <div style={{
-                            marginBottom: '2rem',
-                            borderRadius: '12px',
-                            overflow: 'hidden',
-                            boxShadow: 'var(--shadow-lg)'
-                        }}>
+                        <div className="blog-cover-wrapper">
                             <img
                                 src={blog.coverImage || blog.image}
                                 alt={blog.title}
-                                style={{
-                                    width: '100%',
-                                    height: 'auto',
-                                    maxHeight: '400px',
-                                    objectFit: 'cover',
-                                    display: 'block'
-                                }}
+                                className="blog-cover-image"
                             />
                         </div>
                     )}
 
-                    <header style={{ marginBottom: '2rem' }}>
+                    <header className="blog-header">
                         <div style={{ marginBottom: '1rem' }}>
-                            <span className="blog-category">{blog.category}</span>
+                            <span className="blog-category-badge">{blog.category}</span>
                         </div>
 
-                        <h1 style={{
-                            fontSize: '2.5rem',
-                            color: 'var(--text-bright)',
-                            marginBottom: '1rem',
-                            lineHeight: '1.2'
-                        }}>
+                        <h1 className="blog-title">
                             {blog.title}
                         </h1>
 
-                        <div style={{
-                            display: 'flex',
-                            gap: '1.5rem',
-                            color: 'var(--text-secondary)',
-                            fontSize: '0.9rem',
-                            flexWrap: 'wrap'
-                        }}>
-                            <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                        <div className="blog-meta">
+                            <span className="blog-meta-item">
                                 <Calendar size={14} /> {blog.date || new Date(blog.createdAt).toLocaleDateString()}
                             </span>
-                            <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                            <span className="blog-meta-item">
                                 <Clock size={14} /> {blog.readTime || '5 min'}
                             </span>
-                            <span>By {blog.author?.name || blog.author || 'Admin'}</span>
+                            <span className="blog-meta-item">By {blog.author?.name || blog.author || 'Admin'}</span>
                         </div>
                     </header>
 
                     {/* Article Actions - Like & Bookmark */}
                     <ArticleActions blogId={blog._id || blog.id} blogSlug={slug} />
 
-                    <div style={{
-                        fontSize: '1.1rem',
-                        lineHeight: '1.8',
-                        color: 'var(--text-primary)',
-                        marginBottom: '2rem'
-                    }}>
+                    <div className="blog-detail-content">
                         <p>{blog.excerpt}</p>
 
                         {youtubeId && (
@@ -154,26 +121,18 @@ const BlogDetail = () => {
 
                         {/* Render actual blog content */}
                         <div
-                            style={{ marginTop: '2rem' }}
+                            className="blog-detail-content"
                             dangerouslySetInnerHTML={{ __html: blog.content }}
                         />
                     </div>
 
                     {blog.code && (
-                        <div style={{ marginBottom: '2rem' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                                <h3 style={{ color: 'var(--text-bright)' }}>Code Example</h3>
+                        <div className="blog-code-section">
+                            <div className="blog-code-header">
+                                <h3 className="blog-code-title">Code Example</h3>
                                 <button
                                     onClick={() => setShowPlayground(!showPlayground)}
-                                    style={{
-                                        padding: '0.5rem 1rem',
-                                        background: 'var(--vscode-blue)',
-                                        color: 'white',
-                                        border: 'none',
-                                        borderRadius: '6px',
-                                        cursor: 'pointer',
-                                        fontSize: '0.9rem'
-                                    }}
+                                    className="btn-playground"
                                 >
                                     {showPlayground ? '📖 View Only' : '🎮 Try Interactive'}
                                 </button>
@@ -194,11 +153,11 @@ const BlogDetail = () => {
                     )}
 
                     {blog.tags && blog.tags.length > 0 && (
-                        <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '1px solid var(--vscode-border)' }}>
-                            <h3 style={{ color: 'var(--text-secondary)', marginBottom: '1rem', fontSize: '1rem' }}>Tags</h3>
-                            <div className="blog-tags">
+                        <div className="blog-tags-section">
+                            <h3 className="blog-tags-title">Tags</h3>
+                            <div className="blog-tags-list">
                                 {blog.tags.map((tag, index) => (
-                                    <span key={index} className="tag" style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                                    <span key={index} className="blog-tag">
                                         <Tag size={12} /> {tag}
                                     </span>
                                 ))}

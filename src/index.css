@@ -1145,3 +1145,72 @@ body {
 .fade-in {
   animation: fadeInUp 0.6s ease-out;
 }
+
+/* ==========================================
+   BLOG CONTENT - RESPONSIVE IMAGES & GIFS
+   ========================================== */
+
+/* All images and GIFs in blog content */
+.blog-detail img,
+.blog-detail-content img,
+.content-preview img,
+article img,
+.prose img,
+img[src$=".gif"],
+img[src$=".GIF"] {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.5rem auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile: Full width with padding */
+@media (max-width: 768px) {
+
+  .blog-detail img,
+  .blog-detail-content img,
+  .content-preview img,
+  article img,
+  .prose img,
+  img[src$=".gif"],
+  img[src$=".GIF"] {
+    width: calc(100vw - 3rem) !important;
+    /* Full width minus padding */
+    max-width: calc(100vw - 3rem) !important;
+    height: auto !important;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  /* GIFs specific */
+  img[src$=".gif"],
+  img[src$=".GIF"] {
+    width: calc(100vw - 2rem) !important;
+    max-width: calc(100vw - 2rem) !important;
+  }
+
+  /* Ensure parent containers don't restrict */
+  .blog-detail-content,
+  .content-preview,
+  article,
+  .prose {
+    overflow-x: visible;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .blog-detail img,
+  .blog-detail-content img,
+  .content-preview img,
+  article img,
+  .prose img {
+    max-width: 90%;
+    margin: 1.5rem auto;
+  }
+}
