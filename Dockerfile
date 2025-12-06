@@ -6,14 +6,11 @@ FROM node:20-alpine AS builder
 # Set working directory
 WORKDIR /app
 
-# Copy package files explicitly
-COPY package.json package-lock.json ./
+# Copy all files first (simplest approach for Railway monorepo)
+COPY . .
 
 # Install ALL dependencies (including dev)
 RUN npm install
-
-# Copy source code
-COPY . .
 
 # Build argument for backend URL
 ARG VITE_API_URL=http://localhost:5000
