@@ -21,7 +21,7 @@ const ShareButtons = ({ title, url }) => {
         {
             name: 'LinkedIn',
             icon: <Linkedin size={20} />,
-            url: `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}`,
+            url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
             color: '#0A66C2'
         },
         {
