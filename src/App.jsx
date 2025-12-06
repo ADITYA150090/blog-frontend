@@ -5,6 +5,7 @@ import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 import RocketLoader from './components/RocketLoader';
 import WorkshopPopup from './components/WorkshopPopup';
+import SEO from './components/SEO';
 
 import Home from './pages/Home';
 import BlogDetail from './pages/BlogDetail';
@@ -34,6 +35,7 @@ function App() {
     <AuthProvider>
       <RocketLoader isLoading={isLoading} />
       <WorkshopPopup />
+      <SEO />
 
 
       <div className="app-container">

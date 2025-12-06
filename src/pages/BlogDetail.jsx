@@ -9,6 +9,7 @@ import CommentSection from '../components/CommentSection';
 import ReadingProgress from '../components/ReadingProgress';
 import ArticleActions from '../components/ArticleActions';
 import CodePlayground from '../components/CodePlayground';
+import SEO from '../components/SEO';
 import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
 import './BlogDetail.css';
 
@@ -70,6 +71,15 @@ const BlogDetail = () => {
 
     return (
         <>
+            {/* SEO Metadata */}
+            <SEO
+                title={blog.title}
+                description={blog.excerpt}
+                image={blog.coverImage || blog.image}
+                url={window.location.href}
+                type="article"
+            />
+
             {/* Reading Progress Tracker */}
             <ReadingProgress blogId={blog._id || blog.id} blogSlug={slug} />
 
